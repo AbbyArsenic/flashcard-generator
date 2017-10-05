@@ -1,12 +1,15 @@
 console.log('Cloze is running');
 
-function clozeCard(text, cloze) {
-  this.text = text,
+function ClozeCard(text, cloze) {
+  if (!(this instanceof ClozeCard)) { 
+      return new ClozeCard(text, cloze);
+    }
+  this.fullText = text,
   this.cloze = cloze
 
   this.remove = function() {
     if (text.indexOf(cloze) === -1) {
-      console.log('Oops! Text does not contain this entry');
+      console.log('Oops! Text does not contain the information you selected');
       this.partial = "Please submit valid text to omit";
     } else {
       console.log("Flashcard successfully created!");
@@ -15,15 +18,28 @@ function clozeCard(text, cloze) {
   }
   this.showPartial = function() {
     console.log(this.partial);
-  }
+  } 
   this.showFull = function() {
-    console.log(this.text);
+    console.log(this.fullText);
   }
   this.remove();
 }
 
-var card1 = new clozeCard("There are 2 cups in a pint", "cups");
-var card2 = new clozeCard("There are 4 quarts in a gallon", "cups");
+var firstPresidentCloze = new ClozeCard(
+    "George Washington was the first president of the United States.", 
+    "George Washington"
+    );
 
-card1.showPartial();
-card2.showPartial();
+// "George Washington"
+console.log(firstPresidentCloze.cloze); 
+
+// " ... was the first president of the United States.
+console.log(firstPresidentCloze.partial);
+
+// "George Washington was the first president of the United States.
+console.log(firstPresidentCloze.fullText);
+
+// Should throw or log an error because "oops" doesn't appear in "This doesn't work"
+var brokenCloze = new ClozeCard("This doesn't work", "oops");
+
+//module.exports = ClozeCard;

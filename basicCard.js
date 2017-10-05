@@ -1,19 +1,25 @@
 console.log('Basic is running');
 
-function basicCard(front, back) {
+function BasicCard(front, back) {
+  if (!(this instanceof BasicCard)) { 
+      return new BasicCard(front, back);
+    }
   this.front = front,
   this.back = back
-  this.showCard = function() {
-    console.log(this);
+  this.showFront = function() {
+    console.log(this.front);
   }
-}
+};
 
-var card1 = new basicCard("How many cups are in a pint?", 2);
+var firstPresident = new BasicCard(
+    "Who was the first president of the United States?", 
+    "George Washington"
+    );
 
-console.log(card1);
-console.log(card1.front);
-console.log(card1.back);
+// "Who was the first president of the United States?"
+console.log(firstPresident.front); 
 
-card1.showCard();
+// "George Washington"
+console.log(firstPresident.back); 
 
-console.log(card1);
+//module.exports = BasicCard;
